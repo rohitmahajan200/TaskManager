@@ -12,8 +12,6 @@ export const addTask = createAsyncThunk(
                 return rejectWithValue(error.response.data);
             }
             return rejectWithValue(error.message);
-
-      
     }
     
   }

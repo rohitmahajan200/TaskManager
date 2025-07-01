@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const TaskList = () => {
+ const { tasks, loading, error } = useSelector((state) => state.task);
 
   return (
     <>
     <div>Task Monitor</div>
-
+    <ul>
+      {tasks.map((item)=>(
+        <li key={item.title} className='flex items-center gap-4'>
+          <span className='text-blue-200'>{item.title}</span>
+          <span>{item.description}</span>
+          <span>{item.assignto}</span>
+          <span>{item.status}</span>
+        </li>
+      ))}
+    </ul>
     <Link className='text-white hover:text-blue-300 italic' to="/">Create a new task</Link>
     </>
   )
