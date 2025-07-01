@@ -21,7 +21,7 @@ export const getTasks = createAsyncThunk(
   '/tasks',
   async (filter,{rejectWithValue}) => {
     try {
-      const response = await axios.get("http://localhost:5173/task",{params: filter});
+      const response = await axios.get("http://localhost:5000/task");
       return response.data;
     } catch (error) {
       if (error.response && error.response.data) {
@@ -31,6 +31,36 @@ export const getTasks = createAsyncThunk(
     }
   }
 );
+
+export const changeStatus=createAsyncThunk(  
+  '/tasks/changeStatus',
+  async({id,status},{rejectWithValue})=>{
+    try {
+      const response=await axios.post(`http://localhost:5000/task/${id}`,{status});
+      return response.data;
+    } catch(error){
+      if(error.response && error.response.data){
+        return rejectWithValue(error.response.data)
+      }
+      return rejectWithValue(error.message);
+    }
+  }
+)
+
+export const deleteTask=createAsyncThunk(  
+  '/tasks/delete',
+  async(id,{rejectWithValue})=>{
+    try {
+      const response=await axios.delete(`http://localhost:5000/task/${id}`);
+      return response.data;
+    } catch(error){
+      if(error.response && error.response.data){
+        return rejectWithValue(error.response.data)
+      }
+      return rejectWithValue(error.message);
+    }
+  }
+)
 
 export const taskSlice=createSlice({
     name:"tasks",
@@ -52,7 +82,7 @@ export const taskSlice=createSlice({
         state.tasks.push(action.payload.data);
         })
 
-        .addCase(addTask.pending,(state,action)=>{
+        .addCase(addTask.pending,(state)=>{
         state.loading = true;
         state.error = null;
         })
@@ -68,10 +98,10 @@ export const taskSlice=createSlice({
         .addCase(getTasks.fulfilled,(state,action)=>{
         state.loading = false;
         state.error = null;
-        state.tasks.push(action.payload.data);
+        state.tasks=action.payload.data;
         })
 
-        .addCase(getTasks.pending,(state,action)=>{
+        .addCase(getTasks.pending,(state)=>{
         state.loading = true;
         state.error = null;
         })
@@ -81,8 +111,20 @@ export const taskSlice=createSlice({
         state.error = action.payload.message;
         })
 
+        //-------------------------------------------------------------------------------------------------------
+        .addCase(changeStatus.fulfilled,(state,action)=>{
+          state.tasks.forEach((item)=>{
+          if(item._id==action.payload.data._id){
+            item.status=action.payload.data.status;
+          }
+        }) })
+
+        
+
     }
 
 })
+
+
 
 export default taskSlice.reducer;
