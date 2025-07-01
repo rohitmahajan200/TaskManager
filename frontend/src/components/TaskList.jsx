@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux'
 import { changeStatus, deleteTask, getTasks } from '../redux/taskSlice.js'
+
 const TaskList = () => {
  const [value,setValue]=useState(null);
  const {tasks} = useSelector((state) => state.task);
@@ -21,7 +22,7 @@ useEffect(()=>{
     dispatch(getTasks());
   }
   loadData()
-},[]);
+},[value,tasks,deleteTask]);
 
   return (
     <>
