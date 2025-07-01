@@ -2,6 +2,7 @@ import { Task } from "../model/task.model.js";
 
 export const createTask=async(req,res)=>{
     try {
+        console.log("req obj ",req);
         const {title,description,assignto,status}=req.body;
         const newTask=await Task.create({title,description,assignto,status});
         if(newTask){

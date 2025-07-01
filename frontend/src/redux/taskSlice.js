@@ -2,18 +2,18 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const addTask = createAsyncThunk(
-  '/tasks',
-  async (task, thunkAPI) => {
-    const response = await axios.post("acv",task);
-    return await response.json();
+  '/',
+  async (task) => {
+    const response = await axios.post("http://localhost:5000/",{body:task});
+    return response.data;
   }
 );
 
 export const getTasks = createAsyncThunk(
   '/tasks',
-  async (filter, thunkAPI) => {
-    const response = await axios.get("acv",filter);
-    return await response.json();
+  async (filter) => {
+    const response = await axios.get("http://localhost:5173/task",{params: filter});
+    return response.data;
   }
 );
 
@@ -34,7 +34,7 @@ export const taskSlice=createSlice({
         .addCase(addTask.fulfilled,(state,action)=>{
         state.loading = false;
         state.error = null;
-        state.tasks.push(action.payload);
+        state.tasks.push(action.payload.data);
         })
 
         .addCase(addTask.pending,(state,action)=>{
@@ -44,7 +44,7 @@ export const taskSlice=createSlice({
 
         .addCase(addTask.rejected,(state,action)=>{
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload.message;
         })
 
 //---------------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ export const taskSlice=createSlice({
         .addCase(getTasks.fulfilled,(state,action)=>{
         state.loading = false;
         state.error = null;
-        state.tasks.push(action.payload);
+        state.tasks.push(action.payload.data);
         })
 
         .addCase(getTasks.pending,(state,action)=>{
@@ -63,7 +63,7 @@ export const taskSlice=createSlice({
 
         .addCase(getTasks.rejected,(state,action)=>{
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload.message;
         })
 
     }
