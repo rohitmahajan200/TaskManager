@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const TaskList = () => {
- const { tasks, loading, error } = useSelector((state) => state.task);
+ const {tasks} = useSelector((state) => state.task);
 
   return (
     <>
@@ -14,7 +14,14 @@ const TaskList = () => {
           <span className='text-blue-200'>{item.title}</span>
           <span>{item.description}</span>
           <span>{item.assignto}</span>
-          <span>{item.status}</span>
+          <span>
+          <select className='bg-black'>
+            <option defaultChecked>{item.status}</option>
+            <option>Done</option>
+            <option>In Process</option>
+            <option>Pending</option>
+          </select>
+          </span>
         </li>
       ))}
     </ul>
