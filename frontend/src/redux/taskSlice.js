@@ -3,17 +3,34 @@ import axios from "axios";
 
 export const addTask = createAsyncThunk(
   '/',
-  async (task) => {
-    const response = await axios.post("http://localhost:5000/",{body:task});
+  async (task,{ rejectWithValue }) => {
+    try {
+    const response = await axios.post("http://localhost:5000/",task);
     return response.data;
+    } catch (error) {
+            if (error.response && error.response.data) {
+                return rejectWithValue(error.response.data);
+            }
+            return rejectWithValue(error.message);
+
+      
+    }
+    
   }
 );
 
 export const getTasks = createAsyncThunk(
   '/tasks',
-  async (filter) => {
-    const response = await axios.get("http://localhost:5173/task",{params: filter});
-    return response.data;
+  async (filter,{rejectWithValue}) => {
+    try {
+      const response = await axios.get("http://localhost:5173/task",{params: filter});
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+                return rejectWithValue(error.response.data);
+            }
+            return rejectWithValue(error.message);
+    }
   }
 );
 
