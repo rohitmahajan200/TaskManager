@@ -5,7 +5,7 @@ export const addTask = createAsyncThunk(
   '/',
   async (task,{ rejectWithValue }) => {
     try {
-    const response = await axios.post("http://localhost:5000/",task);
+    const response = await axios.post("https://taskmanager-1-t5jj.onrender.com/",task);
     return response.data;
     } catch (error) {
             if (error.response && error.response.data) {
@@ -21,7 +21,7 @@ export const getTasks = createAsyncThunk(
   '/tasks',
   async (_,{rejectWithValue}) => {
     try {
-      const response = await axios.get("http://localhost:5000/task",{withCredentials: true});
+      const response = await axios.get("https://taskmanager-1-t5jj.onrender.com/task",{withCredentials: true});
       return response.data;
     } catch (error) {
       if (error.response && error.response.data) {
@@ -36,7 +36,7 @@ export const changeStatus=createAsyncThunk(
   '/tasks/changeStatus',
   async({id,status},{rejectWithValue})=>{
     try {
-      const response=await axios.post(`http://localhost:5000/task/${id}`,{status});
+      const response=await axios.post(`https://taskmanager-1-t5jj.onrender.com/task/${id}`,{status});
       return response.data;
     } catch(error){
       if(error.response && error.response.data){
@@ -51,7 +51,7 @@ export const deleteTask=createAsyncThunk(
   '/tasks/delete',
   async(id,{rejectWithValue})=>{
     try {
-      const response=await axios.delete(`http://localhost:5000/task/${id}`);
+      const response=await axios.delete(`https://taskmanager-1-t5jj.onrender.com/task/${id}`);
       return response.data;
     } catch(error){
       if(error.response && error.response.data){
@@ -66,7 +66,7 @@ export const getFilterTasks = createAsyncThunk(
   '/tasks/filter',
   async(filter,{rejectWithValue}) => {
     try {
-      const response = await axios.get(`http://localhost:5000/task/filter/?filter=${filter}`);
+      const response = await axios.get(`https://taskmanager-1-t5jj.onrender.com/filter/?filter=${filter}`);
       return response.data;
     } catch (error) {
       if (error.response && error.response.data) {

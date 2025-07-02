@@ -23,7 +23,7 @@ const TaskList = () => {
   };
 
   const handleLogout=async()=>{
-    await axios.post("http://localhost:5000/logout",{}, { withCredentials: true });
+    await axios.post("https://taskmanager-1-t5jj.onrender.com/logout",{}, { withCredentials: true });
     navigate('/');
   }
 

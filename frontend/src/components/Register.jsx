@@ -12,7 +12,7 @@ const [role,setRole]=useState("");
 //const dispatch=useDispatch();
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        await axios.post("http://localhost:5000/register",{name,email,password,role},{withCredentials:true})
+        await axios.post("https://taskmanager-1-t5jj.onrender.com/register",{name,email,password,role},{withCredentials:true})
     }
 
   return (
