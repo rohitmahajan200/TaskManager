@@ -1,36 +1,50 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { changeStatus, deleteTask, getTasks } from '../redux/taskSlice.js'
 import Filter from './Filter.jsx'
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const TaskList = () => {
   const { tasks } = useSelector((state) => state.task);
   const dispatch = useDispatch();
-
+  const navigate=useNavigate();
+  const [role,Setrole]=useState(Cookies.get('role'));
   const handleChange = (id, status) => {
     dispatch(changeStatus({ id, status }));
   };
+  
+  
 
   const handleDelete = (id) => {
     dispatch(deleteTask(id));
   };
+
+  const handleLogout=async()=>{
+    await axios.post("http://localhost:5000/logout",{}, { withCredentials: true });
+    navigate('/');
+  }
 
   useEffect(() => {
     dispatch(getTasks());
   }, [deleteTask]);
 
   return (
-    <div className="p-6 text-white bg-gray-900 min-h-screen">
+    <>{Cookies.get('token')?
+      <div className="p-6 text-white bg-gray-900 min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Task Monitor</h1>
-
+      <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded hover:cursor-pointer">Logout</button>
       <div className='flex justify-end align-top'>
+        
         <div className=''>
           <Filter />
         </div>
       </div>      
 
-      <Link className="text-blue-400 hover:underline italic mb-4 inline-block" to="/">
+  
+      <Link className="text-blue-400 hover:underline italic mb-4 inline-block" to="/create">
         + Create a new task
       </Link>
 
@@ -62,19 +76,29 @@ const TaskList = () => {
               </select>
             </span>
             <span>
-              {item.status === 'done' && (
+              
+              {item.status === 'done' && role==='admin'?
                 <button
                   className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded hover:cursor-pointer"
                   onClick={() => handleDelete(item._id)}
                 >
                   Delete
-                </button>
-              )}
+                </button>:<span >Only admin can remove task after status is <b>Done</b></span>
+              }
             </span>
           </li>
         ))}
       </ul>
     </div>
+      :<>
+      <h1 className="text-3xl font-bold mb-6">Please Login First To see assing tasks</h1>
+      <Link className="text-blue-400 hover:underline italic mb-4 inline-block" to="/">
+        + Click To Login
+      </Link>
+      </>
+      }
+    </>
+    
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import { addTask } from '../redux/taskSlice.js';
+import Cookies from 'js-cookie';
 
 const Taskform = () => {
 
@@ -18,8 +19,8 @@ const dispatch=useDispatch();
     }
 
   return (
-    <>    
-    <div className='flex flex-col justify-center items-center'>
+    <>{Cookies.get('role')==='admin'?
+      <div className='flex flex-col justify-center items-center'>
 
     
     <form className='flex flex-col justify-center items-center gap-5 p-10 rounded-xl bg-gray-800 mt-15 w-200' onSubmit={handleSubmit}>
@@ -60,7 +61,15 @@ const dispatch=useDispatch();
             <Link className="text-blue-400 hover:underline italic mb-4 inline-block" to="/tasks">
               - Checkout-Assingn Tasks
             </Link>
-</div>
+</div>:
+  <div>
+    <h1 className="text-3xl font-bold mb-6">You are not authorised to create task only <b>Admin</b> can do..</h1>
+    <Link className="text-blue-400 hover:underline italic mb-4 inline-block" to="/tasks">
+              -- Back to DashBoard
+    </Link>
+  </div>
+    } 
+    
     
     </>
 

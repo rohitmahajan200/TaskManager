@@ -21,7 +21,7 @@ export const getTasks = createAsyncThunk(
   '/tasks',
   async (_,{rejectWithValue}) => {
     try {
-      const response = await axios.get("http://localhost:5000/task");
+      const response = await axios.get("http://localhost:5000/task",{withCredentials: true});
       return response.data;
     } catch (error) {
       if (error.response && error.response.data) {
@@ -47,7 +47,7 @@ export const changeStatus=createAsyncThunk(
   }
 )
 
-export const deleteTask=createAsyncThunk(  
+export const deleteTask=createAsyncThunk(
   '/tasks/delete',
   async(id,{rejectWithValue})=>{
     try {
