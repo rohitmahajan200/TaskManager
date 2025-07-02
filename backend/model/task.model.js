@@ -18,11 +18,11 @@ const taskSchema=new mongoose.Schema({
     status:{
         type:String,
         lowercase:true,
-        enum:["to do","in progress","done"],
+        enum:["to-do","in-process","done"],
         index:true
     }
 },{
     timestamps:true
 });
 
-export const Task=mongoose.model("Taks",taskSchema);
+export const Task=mongoose.model("Task",taskSchema);
