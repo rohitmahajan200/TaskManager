@@ -163,7 +163,7 @@ export const login=async(req,res)=>{
             //httpOnly:false, both should be true
             //secure:false,
             httpOnly:false,
-            secure:false,
+            secure:true,
             }
 
             return res
@@ -192,7 +192,7 @@ export const logout=async(req,res)=>{
             //httpOnly:false, both should be true
             //secure:false,
             httpOnly:false,
-            secure:false,
+            secure:true,
             }
 
     return res
