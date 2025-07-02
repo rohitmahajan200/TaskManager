@@ -19,7 +19,7 @@ export const addTask = createAsyncThunk(
 
 export const getTasks = createAsyncThunk(
   '/tasks',
-  async (filter,{rejectWithValue}) => {
+  async (_,{rejectWithValue}) => {
     try {
       const response = await axios.get("http://localhost:5000/task");
       return response.data;
@@ -62,6 +62,21 @@ export const deleteTask=createAsyncThunk(
   }
 )
 
+export const getFilterTasks = createAsyncThunk(
+  '/tasks/filter',
+  async(filter,{rejectWithValue}) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/task/filter/?filter=${filter}`);
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+                return rejectWithValue(error.response.data);
+            }
+            return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const taskSlice=createSlice({
     name:"tasks",
     initialState:{
@@ -82,44 +97,49 @@ export const taskSlice=createSlice({
         state.tasks.push(action.payload.data);
         })
 
-        .addCase(addTask.pending,(state)=>{
-        state.loading = true;
-        state.error = null;
-        })
+        // .addCase(addTask.pending,(state)=>{
+        // state.loading = true;
+        // state.error = null;
+        // })
 
-        .addCase(addTask.rejected,(state,action)=>{
-        state.loading = false;
-        state.error = action.payload.message;
-        })
+        // .addCase(addTask.rejected,(state,action)=>{
+        // state.loading = false;
+        // state.error = action.payload.message;
+        // })
 
 //---------------------------------------------------------------------------------------------------------
 
-        //to add FILTER task to state
+        //to add All task to state
         .addCase(getTasks.fulfilled,(state,action)=>{
         state.loading = false;
         state.error = null;
         state.tasks=action.payload.data;
         })
 
-        .addCase(getTasks.pending,(state)=>{
-        state.loading = true;
-        state.error = null;
-        })
+        // .addCase(getTasks.pending,(state)=>{
+        // state.loading = true;
+        // state.error = null;
+        // })
 
-        .addCase(getTasks.rejected,(state,action)=>{
-        state.loading = false;
-        state.error = action.payload.message;
-        })
+        // .addCase(getTasks.rejected,(state,action)=>{
+        // state.loading = false;
+        // state.error = action.payload.message;
+        // })
 
         //-------------------------------------------------------------------------------------------------------
+        //Afer changing status
         .addCase(changeStatus.fulfilled,(state,action)=>{
           state.tasks.forEach((item)=>{
           if(item._id==action.payload.data._id){
             item.status=action.payload.data.status;
           }
         }) })
+        //-------------------------------------------------------------------------------------------------------
+        //After filter
+        .addCase(getFilterTasks.fulfilled,(state,action)=>{
+          state.tasks=action.payload.data;
+        })
 
-        
 
     }
 

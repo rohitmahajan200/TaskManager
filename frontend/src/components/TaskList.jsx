@@ -1,55 +1,81 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { changeStatus, deleteTask, getTasks } from '../redux/taskSlice.js'
+import Filter from './Filter.jsx'
 
 const TaskList = () => {
- const [value,setValue]=useState(null);
- const {tasks} = useSelector((state) => state.task);
- const dispatch=useDispatch();
+  const { tasks } = useSelector((state) => state.task);
+  const dispatch = useDispatch();
 
- const handleChange=(id,status)=>{
-      setValue(value);
-      dispatch(changeStatus({id,status}));
- }
+  const handleChange = (id, status) => {
+    dispatch(changeStatus({ id, status }));
+  };
 
- const handleDelete=(id)=>{
+  const handleDelete = (id) => {
     dispatch(deleteTask(id));
- }
- 
-useEffect(()=>{
-  const loadData=async()=>{
+  };
+
+  useEffect(() => {
     dispatch(getTasks());
-  }
-  loadData()
-},[value,tasks,deleteTask]);
+  }, [deleteTask]);
 
   return (
-    <>
-    <div>Task Monitor</div>
-    <ul>
-      {tasks.map((item)=>(
-        
-        <li key={item._id} className='flex items-center gap-4'>
-          <span className='text-blue-200'>{item.title}</span>
-          <span>{item.description}</span>
-          <span>{item.assignto}</span>
-          <span>
-          <select className='bg-black' value={value||item.status} onChange={(e)=>handleChange(item._id,e.target.value)}>
-            <option value="todo">to do</option>
-            <option value="done">Done</option>
-            <option value="in progress">in progress</option>
-          </select>
-          </span>
-          <span>
-            {item.status=="done"?<button onClick={()=>handleDelete(item._id)}>Delete</button>:null}
-          </span>
-        </li>
-      ))}
-    </ul>
-    <Link className='text-white hover:text-blue-300 italic' to="/">Create a new task</Link>
-    </>
-  )
-}
+    <div className="p-6 text-white bg-gray-900 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">Task Monitor</h1>
 
-export default TaskList
+      <div className='flex justify-end align-top'>
+        <div className=''>
+          <Filter />
+        </div>
+      </div>      
+
+      <Link className="text-blue-400 hover:underline italic mb-4 inline-block" to="/">
+        + Create a new task
+      </Link>
+
+      
+      
+      <div className="grid grid-cols-5 font-semibold text-lg border-b border-gray-700 pb-2 mb-2">
+        <span>Task</span>
+        <span>Description</span>
+        <span>Assigned To</span>
+        <span>Status</span>
+        <span>Action</span>
+      </div>
+
+      <ul className="space-y-4">
+        {tasks.map((item) => (
+          <li key={item._id} className="grid grid-cols-5 items-center gap-4 p-3 bg-gray-800 rounded-md shadow hover:bg-gray-700 transition">
+            <span className="text-blue-200 break-words">{item.title}</span>
+            <span className="break-words">{item.description}</span>
+            <span className="italic">{item.assignto}</span>
+            <span>
+              <select
+                className="bg-gray-700 border border-gray-600 rounded px-2 py-1 focus:outline-none hover:cursor-pointer"
+                value={item.status}
+                onChange={(e) => handleChange(item._id, e.target.value)}
+              >
+                <option value="to-do">To-Do</option>
+                <option value="in-process">In-Process</option>
+                <option value="done">Done</option>
+              </select>
+            </span>
+            <span>
+              {item.status === 'done' && (
+                <button
+                  className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded hover:cursor-pointer"
+                  onClick={() => handleDelete(item._id)}
+                >
+                  Delete
+                </button>
+              )}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default TaskList;
