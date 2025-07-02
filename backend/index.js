@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(urlencoded({extended:true}));
 app.use(cors({
-  origin:'https://task-manager-u3jc.vercel.app/',
+  origin:'https://task-manager-u3jc-rohit-mahajans-projects-4865b7e7.vercel.app/',
   credentials:true
 }));
 
