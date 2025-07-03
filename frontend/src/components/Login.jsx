@@ -16,13 +16,13 @@ const state=useSelector((state)=>state.user);
     const handleSubmit=async(e)=>{
         e.preventDefault();
         dispatch(login({email,password}));
-        if(state.success){
+        if(state.user.success){
             setTimeout(()=>{
               navigate("/tasks");
             },2000)
             loginAlert("Login Successfully!");
         }else{
-          loginAlert(state.message);
+          loginAlert(state.user.message);
         }
     }
 

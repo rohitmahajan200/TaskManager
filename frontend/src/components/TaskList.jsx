@@ -12,7 +12,6 @@ const TaskList = () => {
   const dispatch = useDispatch();
   const state=useSelector((state)=>state.user);
   const navigate=useNavigate();
-  const [role,Setrole]=useState(Cookies.get('role'));
   const handleChange = (id, status) => {
     dispatch(changeStatus({ id, status }));
   };
@@ -33,7 +32,7 @@ const TaskList = () => {
   }, [deleteTask]);
 
   return (
-    <>{state.success?
+    <>{state.user.success?
       <div className="p-6 text-white bg-gray-900 min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Task Monitor</h1>
       <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded hover:cursor-pointer">Logout</button>
@@ -78,7 +77,7 @@ const TaskList = () => {
             </span>
             <span>
               
-              {item.status === 'done' && role==='admin'?
+              {item.status === 'done' && state.user.data.role==='admin'?
                 <button
                   className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded hover:cursor-pointer"
                   onClick={() => handleDelete(item._id)}
