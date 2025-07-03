@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { register } from "../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-
+import { useCallback } from "react";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,11 +17,11 @@ const Register = () => {
   const state = useSelector((state) => state.user);
   const registerToast = (data) => toast(data);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useCallback(()=>async (e) => {
     e.preventDefault();
     setIsSubmit(true);
     dispatch(register({ name, email, password, role }));
-  };
+  },[isSubmit]);
 
   useEffect(() => {
     if (!isSubmit) return;
