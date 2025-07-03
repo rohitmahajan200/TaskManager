@@ -13,7 +13,7 @@ const [status,setStatus]=useState("");
 const [isSubmit,setIsSubmit]=useState(false);
 
 const createTaskToast=(data)=>toast(data);
-const state=useSelector((state)=>state.user);
+const state=useSelector((state)=>state.task);
 const dispatch=useDispatch();
     const handleSubmit=async(e)=>{
         e.preventDefault();
