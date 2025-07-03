@@ -19,7 +19,7 @@ const state=useSelector((state)=>state.user);
     }
 
     useEffect(()=>{
-      if(state.user!=null)
+      if(state.user!=null){
       if(state?.user?.success){
             setTimeout(()=>{
               navigate("/tasks");
@@ -27,7 +27,8 @@ const state=useSelector((state)=>state.user);
             loginAlert("Login Successfully!");
         }else{
           loginAlert(state?.user?.message);
-        }      
+        }    
+      }  
     },[dispatch,state])
 
 
