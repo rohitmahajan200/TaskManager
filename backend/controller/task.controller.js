@@ -173,20 +173,21 @@ export const login=async(req,res)=>{
         else{
             return res
             .status(400)
-            .json({"message":"User not exist"})
+            .json({"message":"User not exist",data:null,success:false})
         }
         
     } catch (error) {
         console.log(error);
         return res
-            .status(400)
-            .json({"message":"Please enter proper details"})
+            .status(501)
+            .json({"message":"Somethignwent wrong while login",data:null,success:false})
     }
 }
 
 export const logout=async(req,res)=>{
     
-    const options={
+    try {
+        const options={
             httpOnly:true,
             secure:true,
             }
@@ -195,5 +196,11 @@ export const logout=async(req,res)=>{
     .status(200)
     .clearCookie("token",options)
     .clearCookie("role",options)
-    .json({"message":"user logged out",data:null});
-}
+    .json({"message":"user logged out",data:null,success:true});
+    }catch (error) {
+        console.log(error);
+        return res
+            .status(501)
+            .json({"message":"Somethignwent wrong while logout",success:false})
+    }
+    }
