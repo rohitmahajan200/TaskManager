@@ -59,7 +59,7 @@ export const getFilterTasks=async(req,res)=>{
         }else{
         allTasks = await Task.find();
         }
-        
+
         console.log("Filter task ",allTasks)
         if(allTasks){
             return res
@@ -134,17 +134,16 @@ export const register=async(req,res)=>{
         if(newUser){
             return res
             .status(201)
-            .json({"message":"User created",data:newUser})
+            .json({"message":"User created",data:newUser,success:true})
         }
         return res
             .status(500)
-            .json({"message":"Internal Error while creating user"})
+            .json({"message":"Internal Error while creating user",success:false})
     } catch (error) {
         console.log(error);
-        
         return res
             .status(400)
-            .json({"message":"Please enter proper details"})
+            .json({"message":"Please enter proper details",success:false})
     }
 }
 
