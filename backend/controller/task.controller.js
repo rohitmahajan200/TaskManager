@@ -50,13 +50,16 @@ export const getFilterTasks=async(req,res)=>{
         let allTasks;
         const {filter}=req.query;
         console.log(filter);
-         const statusList = ['to-do', 'in-progress', 'done'];
+         const statusList = ['to-do', 'in-process', 'done'];
 
         if (statusList.includes(filter.toLowerCase())) {
         allTasks = await Task.find({ status: filter });
-        }else {
+        }else if(filter){
         allTasks = await Task.find({ assignto: filter });
+        }else{
+        allTasks = await Task.find();
         }
+        
         console.log("Filter task ",allTasks)
         if(allTasks){
             return res
