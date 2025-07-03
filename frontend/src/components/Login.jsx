@@ -11,7 +11,7 @@ const [password,setPassword]=useState("");
 
 const navigate=useNavigate();
 const dispatch=useDispatch();
-const {user}=useSelector((state)=>state.user);
+const state=useSelector((state)=>state.user);
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
@@ -19,15 +19,15 @@ const {user}=useSelector((state)=>state.user);
     }
 
     useEffect(()=>{
-      if(user.user.success){
+      if(state.user.success){
             setTimeout(()=>{
               navigate("/tasks");
             },2000)
             loginAlert("Login Successfully!");
         }else{
-          loginAlert(user.user.message);
+          loginAlert(state.user.message);
         }
-    },[user])
+    },[state])
 
 
   return (
