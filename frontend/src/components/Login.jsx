@@ -19,17 +19,15 @@ const state=useSelector((state)=>state.user);
     }
 
     useEffect(()=>{
-      // if(state.user.user.success){
-      //       setTimeout(()=>{
-      //         navigate("/tasks");
-      //       },2000)
-      //       loginAlert("Login Successfully!");
-      //   }else{
-      //     loginAlert(state.user.user.message);
-      //   }
-      console.log("state is here==>",state);
-      
-    },[state,dispatch])
+      if(state.user.success){
+            setTimeout(()=>{
+              navigate("/tasks");
+            },2000)
+            loginAlert(state.user.message);
+        }else{
+          loginAlert(state.user.message);
+        }      
+    },[state]);
 
 
   return (
