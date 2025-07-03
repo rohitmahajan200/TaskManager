@@ -33,7 +33,7 @@ const Register = () => {
     } else {
       registerToast(state.message);
     }
-  }, [state]);
+  }, [state,isSubmit]);
 
   return (
     <>
