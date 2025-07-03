@@ -9,6 +9,7 @@ const loginAlert=(data)=>toast(data);
 
 const [email,setEmail]=useState("");
 const [password,setPassword]=useState("");
+const [isSubmit,setIsSubmit]=useState(false);
 
 const navigate=useNavigate();
 const dispatch=useDispatch();
@@ -16,17 +17,18 @@ const state=useSelector((state)=>state.user);
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
+        isSubmit(true);
         dispatch(login({email,password}));
     }
 
     useEffect(()=>{
 
-      if(state?.user?.success){
+      if(isSubmit && state?.user?.success){
             setTimeout(()=>{
               navigate("/tasks");
             },2000)
             loginAlert("Login Successfully!");
-        }else{
+        }else if (state?.user?.message){
           loginAlert(state?.user?.message);
         }  
 
