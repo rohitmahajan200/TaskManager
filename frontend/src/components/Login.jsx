@@ -28,7 +28,9 @@ const state=useSelector((state)=>state.user);
         }else{
           loginAlert(state?.user?.message);
         }    
-      }  
+      }else{
+        loginAlert("User Logout!");
+      }
     },[dispatch,state])
 
 
