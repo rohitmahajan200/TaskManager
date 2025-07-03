@@ -9,8 +9,6 @@ export const login=createAsyncThunk(
             {email,password},
             {withCredentials:true}
             );
-            console.log("Payload here==>",response.data);
-            
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -52,7 +50,7 @@ const userSlice=createSlice(
             .addCase(login.rejected,(state,action)=>{
                 state.error=action.payload
             })
-            
+
             .addCase(logout.fulfilled,(state,action)=>{
                 state=action.payload
             })

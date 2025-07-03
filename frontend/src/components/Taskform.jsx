@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { addTask } from '../redux/taskSlice.js';
-import Cookies from 'js-cookie';
 
 const Taskform = () => {
 

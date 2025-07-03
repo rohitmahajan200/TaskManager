@@ -21,11 +21,13 @@ export const getTasks = createAsyncThunk(
   '/tasks',
   async (_,{rejectWithValue}) => {
     try {
-      const response = await axios.get("https://taskmanager-1-t5jj.onrender.com/task",{},{withCredentials: true});
+      const response = await axios.get("https://taskmanager-1-t5jj.onrender.com/task",{},{withCredentials:true});
       console.log("All tasks here==>",response.data);
       
       return response.data;
-    } catch (error) {
+    }catch (error) {
+      console.log("error while all tasks=>",error);
+      
       if (error.response && error.response.data) {
                 return rejectWithValue(error.response.data);
             }
