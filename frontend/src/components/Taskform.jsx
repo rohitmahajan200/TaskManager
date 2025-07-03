@@ -77,7 +77,7 @@ const navigate=useNavigate();
         onChange={(e)=>setStatus(e.target.value)} 
         className='border-b-2 border-blue-300 h-10 w-70 rounded-xs focus:outline-none '>
         </input>
-        <h4>Note:-For status only expecting <b>To-Do</b>, <b>In-process</b>, <b>Done</b> either of them</h4>
+        <h4>Note:-For status only expecting <b>to-do</b>, <b>in-process</b>, <b>done</b> either of them</h4>
         <button className='bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded hover:cursor-pointer'>Create Task</button>
         <ToastContainer />
     </form>

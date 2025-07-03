@@ -80,7 +80,7 @@ const Register = () => {
             className="border-b-2 border-blue-300 h-10 w-70 rounded-xs focus:outline-none "
           ></input>
           <div className="text-gray-50 font-thin italic mt-0">
-            Note:-For Role only expecting <b>Admin</b>, <b>User</b> either of
+            Note:-For Role only expecting <b>admin</b>, <b>user</b> either of
             them
           </div>
           <button className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded hover:cursor-pointer">
