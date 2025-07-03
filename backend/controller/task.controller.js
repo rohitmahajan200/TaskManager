@@ -9,17 +9,17 @@ export const createTask=async(req,res)=>{
         if(newTask){
             return res
             .status(201)
-            .json({"message":"New task created",data:newTask});
+            .json({"message":"New task created",data:newTask,sucess:true});
         }   
         else{
             return res
             .status(500)
-            .json({"message":"Some thing went wrong we are checking",error:newTask});
+            .json({"message":"Some thing went wrong we are checking",error:newTask,success:false});
         }
     } catch (error) {        
         return res
             .status(400)
-            .json({"message":error.message});
+            .json({"message":error.message,success:false});
     }
 }
 
