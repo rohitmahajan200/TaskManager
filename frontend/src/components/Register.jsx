@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { register } from "../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-import { useCallback } from "react";
+
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -67,6 +67,7 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="border-b-2 border-blue-300 h-10 w-70 rounded-xs focus:outline-none"
           ></input>
+          <div className="text-gray-50 font-thin italic">Password must be at least 8 characters and include uppercase, lowercase, number, and special character</div>
 
           <input
             placeholder="Enter Your Role"
