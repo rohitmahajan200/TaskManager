@@ -154,7 +154,7 @@ export const taskSlice = createSlice({
           if (item._id == action.payload.data._id) {
             item.status = action.payload.data.status;
           }
-        });
+        })
       })
 
       //-------------------------------------------------------------------------------------------------------
@@ -170,8 +170,8 @@ export const taskSlice = createSlice({
         state.error = null;
         const deletedId = action.meta.arg;
         state.tasks = state.tasks.filter((task) => task._id !== deletedId);
-      });
-  },
+      })
+  }
 });
 
 export default taskSlice.reducer;

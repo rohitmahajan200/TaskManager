@@ -65,7 +65,7 @@ const userSlice=createSlice(
                 state.message=action.payload.message;
                 state.success=action.payload.success;
             })
-            .addCase(register.fulfilled,(state,action)=>{
+            .addCase(register.rejected,(state,action)=>{
                 state.message=action.payload.message;
                 state.success=action.payload.success;
             })
