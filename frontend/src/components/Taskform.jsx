@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { addTask } from '../redux/taskSlice.js';
 import { toast, ToastContainer } from 'react-toastify';
+import {useNavigate} from 'react-router-dom';
 
 const Taskform = () => {
 
@@ -17,6 +18,7 @@ const state=useSelector((state)=>state.task);
 const userState=useSelector((state)=>state.user);
 
 const dispatch=useDispatch();
+const navigate=useNavigate();
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
@@ -32,11 +34,13 @@ const dispatch=useDispatch();
       setTimeout(()=>{
         createTaskToast(state.message);
       },2000)
+      navigate("/");
+
       }else{
         createTaskToast(state.message);
       }
 
-    },[isSubmit,handleSubmit])
+    },[handleSubmit])
 
   return (
     <>{userState?.user?.data?.role==='admin'?
