@@ -19,7 +19,7 @@ const state=useSelector((state)=>state.user);
     }
 
     useEffect(()=>{
-      if(state.user!=null){
+      if(state.user?.message){
       if(state?.user?.success){
             setTimeout(()=>{
               navigate("/tasks");
