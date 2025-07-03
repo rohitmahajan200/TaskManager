@@ -9,7 +9,7 @@ export const createTask=async(req,res)=>{
         if(newTask){
             return res
             .status(201)
-            .json({"message":"New task created",data:newTask,sucess:true});
+            .json({"message":"New task created",data:newTask,success:true});
         }   
         else{
             return res
