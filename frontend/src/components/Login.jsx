@@ -17,13 +17,13 @@ const state=useSelector((state)=>state.user);
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        isSubmit(true);
+        setIsSubmit(true);
         dispatch(login({email,password}));
     }
 
     useEffect(()=>{
-
-      if(isSubmit && state?.user?.success){
+      if(!isSubmit)return;
+      if(state?.user?.success){
             setTimeout(()=>{
               navigate("/tasks");
             },2000)
