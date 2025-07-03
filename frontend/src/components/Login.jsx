@@ -19,14 +19,16 @@ const {user}=useSelector((state)=>state.user);
     }
 
     useEffect(()=>{
-      if(user.success){
-            setTimeout(()=>{
-              navigate("/tasks");
-            },2000)
-            loginAlert(user.message);
-        }else{
-          loginAlert(user.message);
-        }      
+      // if(user.success){
+      //       setTimeout(()=>{
+      //         navigate("/tasks");
+      //       },2000)
+      //       loginAlert(user.message);
+      //   }else{
+      //     loginAlert(user.message);
+      //   }      
+      console.log(user);
+      
     },[user?.success,user?.message]);
 
 
