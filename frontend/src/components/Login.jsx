@@ -1,19 +1,28 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-const Login = () => {
+import {useDispatch, useSelector} from 'react-redux';
+import { login } from '../redux/userSlice';
+import { ToastContainer, toast } from 'react-toastify';
 
+const Login = () => {
+const loginAlert=(data)=>toast(data);
 const [email,setEmail]=useState("");
 const [password,setPassword]=useState("");
 
 const navigate=useNavigate();
-//const dispatch=useDispatch();
+const dispatch=useDispatch();
+const state=useSelector((state)=>state.user);
+
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        const response=await axios.post("https://taskmanager-1-t5jj.onrender.com/login",{email,password},{ withCredentials: true } );
-        console.log(response.data.success);
-        if(response.data.success){
-            navigate("/tasks")
+        dispatch(login(email,password));
+        if(state.success){
+            setTimeout(()=>{
+              navigate("/tasks");
+            },2000)
+            loginAlert("Login Successfully!");
+        }else{
+          loginAlert(state.message);
         }
     }
 
@@ -39,7 +48,7 @@ const navigate=useNavigate();
          onChange={(e)=>setPassword(e.target.value)} 
          className='border-b-2 border-blue-300 h-10 w-70 rounded-xs focus:outline-none'>
          </input>
-
+        <ToastContainer />
         <button className='bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded hover:cursor-pointer'>Login</button>
         
     </form>

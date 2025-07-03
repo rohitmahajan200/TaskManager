@@ -10,6 +10,7 @@ import axios from 'axios'
 const TaskList = () => {
   const { tasks } = useSelector((state) => state.task);
   const dispatch = useDispatch();
+  const state=useSelector((state)=>state.user);
   const navigate=useNavigate();
   const [role,Setrole]=useState(Cookies.get('role'));
   const handleChange = (id, status) => {
@@ -32,7 +33,7 @@ const TaskList = () => {
   }, [deleteTask]);
 
   return (
-    <>{Cookies.get('token')?
+    <>{state.success?
       <div className="p-6 text-white bg-gray-900 min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Task Monitor</h1>
       <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded hover:cursor-pointer">Logout</button>

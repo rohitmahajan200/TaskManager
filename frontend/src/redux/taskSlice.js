@@ -90,6 +90,7 @@ export const taskSlice=createSlice({
 
     extraReducers:(builder)=>{
         //to add task to state
+
         builder
         .addCase(addTask.fulfilled,(state,action)=>{
         state.loading = false;
@@ -134,6 +135,7 @@ export const taskSlice=createSlice({
             item.status=action.payload.data.status;
           }
         }) })
+        
         //-------------------------------------------------------------------------------------------------------
         //After filter
         .addCase(getFilterTasks.fulfilled,(state,action)=>{

@@ -1,18 +1,19 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 const Register = () => {
 
 const [name,setName]=useState("");
 const [email,setEmail]=useState("");
 const [password,setPassword]=useState("");
 const [role,setRole]=useState("");
-
+const navigate=useNavigate();
 //const dispatch=useDispatch();
     const handleSubmit=async(e)=>{
         e.preventDefault();
         await axios.post("https://taskmanager-1-t5jj.onrender.com/register",{name,email,password,role},{withCredentials:true})
+        navigate("/");
     }
 
   return (
