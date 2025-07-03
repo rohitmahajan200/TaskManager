@@ -11,7 +11,7 @@ const [password,setPassword]=useState("");
 
 const navigate=useNavigate();
 const dispatch=useDispatch();
-const {user}=useSelector((state)=>state.user);
+const state=useSelector((state)=>state.user);
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
@@ -19,17 +19,15 @@ const {user}=useSelector((state)=>state.user);
     }
 
     useEffect(()=>{
-      // if(user.success){
-      //       setTimeout(()=>{
-      //         navigate("/tasks");
-      //       },2000)
-      //       loginAlert(user.message);
-      //   }else{
-      //     loginAlert(user.message);
-      //   }      
-      console.log(user);
-      
-    },[user?.success,user?.message]);
+      if(state.user.success){
+            setTimeout(()=>{
+              navigate("/tasks");
+            },2000)
+            loginAlert("Login Successfully!");
+        }else{
+          loginAlert(state.user.message);
+        }
+    },[dispatch,state])
 
 
   return (
@@ -49,7 +47,7 @@ const {user}=useSelector((state)=>state.user);
         </input>
 
         <input placeholder='Enter Password'
-         type='password'
+        type='password'
          name='password' 
          value={password}
          onChange={(e)=>setPassword(e.target.value)} 
