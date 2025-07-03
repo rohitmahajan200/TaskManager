@@ -19,7 +19,7 @@ const state=useSelector((state)=>state.user);
     }
 
     useEffect(()=>{
-      if(state.user.success){
+      if(state.user.user.success){
             setTimeout(()=>{
               navigate("/tasks");
             },2000)
