@@ -12,7 +12,7 @@ const TaskList = () => {
   const dispatch = useDispatch();
   const state=useSelector((state)=>state.user);
   const navigate=useNavigate();
-  
+
   const handleChange = (id, status) => {
     dispatch(changeStatus({ id, status }));
   };
