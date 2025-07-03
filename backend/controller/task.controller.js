@@ -131,6 +131,8 @@ export const register=async(req,res)=>{
         console.log(name,email,password,role);
         
         const newUser=await User.create({name,email,password,role});
+        console.log("new user=>",newUser);
+        
         if(newUser){
             return res
             .status(201)
