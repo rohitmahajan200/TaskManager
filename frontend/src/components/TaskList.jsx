@@ -28,7 +28,7 @@ const TaskList = () => {
 
   useEffect(() => {
     dispatch(getTasks());
-  }, [deleteTask]);
+  }, [deleteTask,state]);
 
   return (
     <>{state.user?.success?
