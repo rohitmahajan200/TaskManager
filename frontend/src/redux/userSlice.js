@@ -3,30 +3,54 @@ import axios from 'axios';
 
 export const login=createAsyncThunk(
     'task/login',
-    ({email,password})=>{
-        axios.post("https://taskmanager-1-t5jj.onrender.com/login",{email,password},{withCredentials:true});
+    async({email,password},{rejectWithValue})=>{
+        try {
+           const response=await axios.post("https://taskmanager-1-t5jj.onrender.com/login",
+            {email,password},
+            {withCredentials:true}
+            );
+            console.log("Payload here==>",response.data);
+            
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
     }
 )
 
 export const logout=createAsyncThunk(
     'task/logout',
-    ()=>{
-        axios.post("https://taskmanager-1-t5jj.onrender.com/logout",{},{withCredentials:true});
+    async(_,{rejectWithValue})=>{
+       try {
+         const response =await axios.post("https://taskmanager-1-t5jj.onrender.com/logout",
+            {},
+            {withCredentials:true}
+         );
+         return response.data;
+       } catch (error) {
+        return rejectWithValue(error.response.data);
+       }
     }
 )
 
 const userSlice=createSlice(
     {
         name:'user',
-        initialState:{},
+        initialState:
+        {
+            user: null,
+            loading: false,
+            error: null,
+        },
+
         reducers:{},
         extraReducers:(builder)=>{
             builder
             .addCase(login.fulfilled,(state,action)=>{
-                state=action.payload.data
+                state.user=action.payload
             })
             .addCase(logout.fulfilled,(state,action)=>{
-                state=action.payload.data
+                state=action.payload
             })
         }
         
