@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
 const loginAlert=(data)=>toast(data);
+
 const [email,setEmail]=useState("");
 const [password,setPassword]=useState("");
 
@@ -19,6 +20,7 @@ const state=useSelector((state)=>state.user);
     }
 
     useEffect(()=>{
+
       if(state?.user?.success){
             setTimeout(()=>{
               navigate("/tasks");
@@ -26,7 +28,8 @@ const state=useSelector((state)=>state.user);
             loginAlert("Login Successfully!");
         }else{
           loginAlert(state?.user?.message);
-        }    
+        }  
+
       },[dispatch,state])
 
 

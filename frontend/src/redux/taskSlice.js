@@ -70,7 +70,8 @@ export const getFilterTasks = createAsyncThunk(
   async(filter,{rejectWithValue}) => {
     try {
       const response = await axios.get(`https://taskmanager-1-t5jj.onrender.com/filter/?filter=${filter}`,{},{withCredentials:true});
-      return response.data;
+      console.log("filter data here=>",response.data);
+      return response.data;      
     } catch (error) {
       if (error.response && error.response.data) {
                 return rejectWithValue(error.response.data);
@@ -142,7 +143,16 @@ export const taskSlice=createSlice({
         //-------------------------------------------------------------------------------------------------------
         //After filter
         .addCase(getFilterTasks.fulfilled,(state,action)=>{
+          state.loading = false;
+          state.error = null;
           state.tasks=action.payload.data;
+        })
+        //----------------------------------------------------------------------------------------------------
+        .addCase(deleteTask.fulfilled,(state,action)=>{
+         state.loading = false;
+         state.error = null;
+         const deletedId = action.meta.arg;
+         state.tasks = state.tasks.filter(task => task._id !== deletedId);
         })
 
 

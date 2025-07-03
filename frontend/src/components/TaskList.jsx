@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { changeStatus, deleteTask, getTasks } from '../redux/taskSlice.js'
@@ -17,9 +17,9 @@ const TaskList = () => {
     dispatch(changeStatus({ id, status }));
   };
   
-  const handleDelete = (id) => {
+  const handleDelete = useCallback((id) => {
     dispatch(deleteTask(id));
-  };
+  },[dispatch]);
 
   const handleLogoutFn=async()=>{
     dispatch(logout());
@@ -28,7 +28,7 @@ const TaskList = () => {
 
   useEffect(() => {
     dispatch(getTasks());
-  }, [dispatch,state]);
+  }, [dispatch]);
 
   return (
     <>{state.user?.success?
