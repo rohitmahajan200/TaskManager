@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { addTask } from '../redux/taskSlice.js';
 import Cookies from 'js-cookie';
 
@@ -10,7 +10,7 @@ const [title,setTitle]=useState("");
 const [description,setDescription]=useState("");
 const [assignto,setAssignto]=useState("");
 const [status,setStatus]=useState("");
-
+const state=useSelector((state)=>state.user);
 const dispatch=useDispatch();
     const handleSubmit=async(e)=>{
         e.preventDefault();
@@ -19,7 +19,7 @@ const dispatch=useDispatch();
     }
 
   return (
-    <>{Cookies.get('role')==='admin'?
+    <>{state?.user?.user?.role==='admin'?
       <div className='flex flex-col justify-center items-center'>
 
     

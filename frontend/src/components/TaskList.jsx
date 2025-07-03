@@ -5,7 +5,6 @@ import { changeStatus, deleteTask, getTasks } from '../redux/taskSlice.js'
 import Filter from './Filter.jsx'
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
 const TaskList = () => {
   const { tasks } = useSelector((state) => state.task);
@@ -16,14 +15,12 @@ const TaskList = () => {
     dispatch(changeStatus({ id, status }));
   };
   
-  
-
   const handleDelete = (id) => {
     dispatch(deleteTask(id));
   };
 
   const handleLogout=async()=>{
-    await axios.post("https://taskmanager-1-t5jj.onrender.com/logout",{}, { withCredentials: true });
+    dispatch(handleLogout());
     navigate('/');
   }
 
