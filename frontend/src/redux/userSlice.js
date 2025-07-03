@@ -2,7 +2,7 @@ import {createAsyncThunk,createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const register=createAsyncThunk(
-    'task/login',
+    'task/register',
     async({name,email,password,role},{rejectWithValue})=>{
         try {
            const response=await axios.post("https://taskmanager-1-t5jj.onrender.com/register",
