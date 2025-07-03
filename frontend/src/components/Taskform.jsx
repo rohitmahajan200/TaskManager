@@ -14,6 +14,8 @@ const [isSubmit,setIsSubmit]=useState(false);
 
 const createTaskToast=(data)=>toast(data);
 const state=useSelector((state)=>state.task);
+const userState=useSelector((state)=>state.user);
+
 const dispatch=useDispatch();
     const handleSubmit=async(e)=>{
         e.preventDefault();
@@ -36,7 +38,7 @@ const dispatch=useDispatch();
     },[isSubmit])
 
   return (
-    <>{state?.user?.data?.role==='admin'?
+    <>{userState?.user?.data?.role==='admin'?
       <div className='flex flex-col justify-center items-center'>
 
 
