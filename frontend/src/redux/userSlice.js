@@ -49,6 +49,10 @@ const userSlice=createSlice(
             .addCase(login.fulfilled,(state,action)=>{
                 state.user=action.payload
             })
+            .addCase(login.rejected,(state,action)=>{
+                state.error=action.payload
+            })
+            
             .addCase(logout.fulfilled,(state,action)=>{
                 state=action.payload
             })

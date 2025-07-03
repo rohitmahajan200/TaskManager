@@ -25,7 +25,7 @@ const state=useSelector((state)=>state.user);
             },2000)
             loginAlert("Login Successfully!");
         }else{
-          loginAlert(state?.user?.message);
+          loginAlert(state?.error);
         }      
     },[dispatch,state])
 
