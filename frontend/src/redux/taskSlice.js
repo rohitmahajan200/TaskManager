@@ -152,7 +152,7 @@ export const taskSlice=createSlice({
          state.loading = false;
          state.error = null;
          const deletedId = action.meta.arg;
-         state.tasks = state.tasks.filter(task => task._id !== deletedId);
+         state.tasks = state.tasks.filter(task =>task._id !== deletedId);
         })
 
 
