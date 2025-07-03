@@ -19,7 +19,7 @@ const dispatch=useDispatch();
     }
 
   return (
-    <>{state?.user?.user?.role==='admin'?
+    <>{state?.user?.data?.role==='admin'?
       <div className='flex flex-col justify-center items-center'>
 
     
