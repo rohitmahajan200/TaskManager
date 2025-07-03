@@ -17,6 +17,7 @@ const state=useSelector((state)=>state.task);
 const userState=useSelector((state)=>state.user);
 
 const dispatch=useDispatch();
+
     const handleSubmit=async(e)=>{
         e.preventDefault();
         const task={title,description,assignto,status};
@@ -35,7 +36,7 @@ const dispatch=useDispatch();
         createTaskToast(state.message);
       }
 
-    },[isSubmit])
+    },[isSubmit,handleSubmit])
 
   return (
     <>{userState?.user?.data?.role==='admin'?
