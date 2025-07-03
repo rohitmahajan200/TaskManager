@@ -145,7 +145,7 @@ export const register=async(req,res)=>{
         console.log(error);
         return res
             .status(400)
-            .json({"message":"Please enter proper details",success:false})
+            .json({"message":error.message,success:false})
     }
 }
 
