@@ -15,7 +15,7 @@ const state=useSelector((state)=>state.user);
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        dispatch(login(email,password));
+        dispatch(login({email,password}));
         if(state.success){
             setTimeout(()=>{
               navigate("/tasks");
