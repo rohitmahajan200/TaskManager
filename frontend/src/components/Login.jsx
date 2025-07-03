@@ -29,7 +29,7 @@ const state=useSelector((state)=>state.user);
               navigate("/tasks");
             },2000)
             loginAlert("Login Successfully!");
-        }else if (state?.user?.message){
+        }else if (state?.error?.message){
           loginAlert(state?.error?.message);
         }  
 
