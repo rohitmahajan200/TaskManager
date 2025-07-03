@@ -34,7 +34,7 @@ const navigate=useNavigate();
       setTimeout(()=>{
         createTaskToast(state.message);
       },2000)
-      navigate("/");
+      navigate("/tasks");
 
       }else{
         createTaskToast(state.message);

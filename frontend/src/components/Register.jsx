@@ -10,7 +10,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [isSubmit, setIsSubmit] = useState(true);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const Register = () => {
     } else {
       registerToast(state.message);
     }
-  }, [isSubmit]);
+  }, [handleSubmit]);
 
   return (
     <>

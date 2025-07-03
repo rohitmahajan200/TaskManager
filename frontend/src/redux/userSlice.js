@@ -64,10 +64,12 @@ const userSlice=createSlice(
             .addCase(register.fulfilled,(state,action)=>{
                 state.message=action.payload.message;
                 state.success=action.payload.success;
+                state.user=null;
             })
             .addCase(register.rejected,(state,action)=>{
                 state.message=action.payload.message;
                 state.success=action.payload.success;
+                state.user=null;
             })
 
             .addCase(login.fulfilled,(state,action)=>{
