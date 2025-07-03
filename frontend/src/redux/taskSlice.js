@@ -54,7 +54,7 @@ export const deleteTask=createAsyncThunk(
   '/tasks/delete',
   async(id,{rejectWithValue})=>{
     try {
-      const response=await axios.delete(`https://taskmanager-1-t5jj.onrender.com/task/${id}`,{},{withCredentials:true});
+      const response=await axios.delete(`https://taskmanager-1-t5jj.onrender.com/task/${id}`,{withCredentials:true});
       return response.data;
     } catch(error){
       if(error.response && error.response.data){
@@ -69,7 +69,7 @@ export const getFilterTasks = createAsyncThunk(
   '/tasks/filter',
   async(filter,{rejectWithValue}) => {
     try {
-      const response = await axios.get(`https://taskmanager-1-t5jj.onrender.com/filter/?filter=${filter}`,{},{withCredentials:true});
+      const response = await axios.get(`https://taskmanager-1-t5jj.onrender.com/filter`,{params:{filter},withCredentials:true});
       console.log("filter data here=>",response.data);
       return response.data;      
     } catch (error) {
