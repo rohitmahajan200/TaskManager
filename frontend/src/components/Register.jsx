@@ -17,11 +17,11 @@ const Register = () => {
   const state = useSelector((state) => state.user);
   const registerToast = (data) => toast(data);
 
-  const handleSubmit = useCallback(()=>async (e) => {
+  const handleSubmit =(e) => {
     e.preventDefault();
     setIsSubmit(true);
     dispatch(register({ name, email, password, role }));
-  },[isSubmit]);
+  };
 
   useEffect(() => {
     if (!isSubmit) return;
@@ -33,7 +33,7 @@ const Register = () => {
     } else {
       registerToast(state.message);
     }
-  }, [handleSubmit]);
+  }, [handleSubmit,state]);
 
   return (
     <>
