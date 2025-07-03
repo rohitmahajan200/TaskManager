@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { login } from '../redux/userSlice';
@@ -16,6 +16,8 @@ const state=useSelector((state)=>state.user);
     const handleSubmit=async(e)=>{
         e.preventDefault();
         dispatch(login({email,password}));
+        console.log("USer state here==>",state.user);
+        
         if(state.user.success){
             setTimeout(()=>{
               navigate("/tasks");
@@ -25,6 +27,7 @@ const state=useSelector((state)=>state.user);
           loginAlert(state.user.message);
         }
     }
+
 
   return (
     <>    
