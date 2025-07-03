@@ -17,7 +17,7 @@ const Register = () => {
   const state = useSelector((state) => state.user);
   const registerToast = (data) => toast(data);
 
-  const handleSubmit =(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmit(true);
     dispatch(register({ name, email, password, role }));
@@ -33,7 +33,7 @@ const Register = () => {
     } else {
       registerToast(state.message);
     }
-  }, [state,isSubmit]);
+  }, [state, isSubmit]);
 
   return (
     <>
@@ -67,7 +67,10 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="border-b-2 border-blue-300 h-10 w-70 rounded-xs focus:outline-none"
           ></input>
-          <div className="text-gray-50 font-thin italic">Password must be at least 8 characters and include uppercase, lowercase, number, and special character</div>
+          <div className="text-gray-50 font-thin italic mt-0">
+            Password must be at least 8 characters and include uppercase,
+            lowercase, number, and special character
+          </div>
 
           <input
             placeholder="Enter Your Role"
@@ -76,10 +79,10 @@ const Register = () => {
             onChange={(e) => setRole(e.target.value)}
             className="border-b-2 border-blue-300 h-10 w-70 rounded-xs focus:outline-none "
           ></input>
-          <h4>
+          <div className="text-gray-50 font-thin italic mt-0">
             Note:-For Role only expecting <b>Admin</b>, <b>User</b> either of
             them
-          </h4>
+          </div>
           <button className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded hover:cursor-pointer">
             Register
           </button>
