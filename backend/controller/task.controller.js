@@ -160,9 +160,7 @@ export const login=async(req,res)=>{
             const token=await user.genrateToken();
 
             const options={
-            //httpOnly:false, both should be true
-            //secure:false,
-            httpOnly:false,
+            httpOnly:true,
             secure:true,
             }
 
@@ -189,9 +187,7 @@ export const login=async(req,res)=>{
 export const logout=async(req,res)=>{
     
     const options={
-            //httpOnly:false, both should be true
-            //secure:false,
-            httpOnly:false,
+            httpOnly:true,
             secure:true,
             }
 
@@ -199,5 +195,5 @@ export const logout=async(req,res)=>{
     .status(200)
     .clearCookie("token",options)
     .clearCookie("role",options)
-    .json({"message":"user logged out"})
+    .json({"message":"user logged out",data:null});
 }

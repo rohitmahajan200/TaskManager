@@ -25,3 +25,21 @@ export const authMiddleware=async(req,res,next)=>{
     }
     
 }
+
+export const adminCheck=async(req,res,next)=>{
+    try {
+        const role=req.cookies.role;
+        if(role==='admin'){
+            next();
+        }
+        else{
+            return res
+            .status(402)
+            .json({"message":"You are not authorised to create task",success:false})
+            }
+    }catch (error){
+        return res
+            .status(501)
+            .json({"message":"Somthing went wrong"})
+    }
+}
